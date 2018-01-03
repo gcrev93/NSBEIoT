@@ -6,7 +6,7 @@
 <a name="Overview"></a>
 ## Overview ##
 
-Welcome to Cloud City! In this hands-on lab and the ones that follow, you will build a comprehensive IoT solution that demonstrates some of the very best features Microsoft Azure has to offer, including [IoT Hubs](https://azure.microsoft.com/services/iot-hub/), [Event Hubs](https://azure.microsoft.com/services/event-hubs/), [Azure Functions](https://azure.microsoft.com/services/functions/), [Stream Analytics](https://azure.microsoft.com/services/stream-analytics/), and [Cognitive Services](https://azure.microsoft.com/services/cognitive-services/). The solution you build today will culminate into an Air-Traffic Control (ATC) app that shows simulated aircraft flying through an ATC sector and warns users when aircraft get too close to each other.
+Welcome to the Microsoft Internet of Things (IoT) Workshop! In this hands-on lab and the ones that follow, you will build a comprehensive IoT solution that demonstrates some of the very best features Microsoft Azure has to offer. The solution you build today will culminate into an Air-Traffic Control (ATC) app that shows simulated aircraft flying through an ATC sector and warns users when aircraft get too close to each other.
 
 ![A user interface for an Air Traffic Control Application with dots and heading information overlaid on a geographical map.  Also includes summary statistics for all flights shown on the map, as well as attitude information for selected airplanes.](Images/atc-app.png)
 
@@ -18,14 +18,6 @@ You will be the pilot of one of these aircraft. And to do the flying, you will u
 
 _IoT development board_
 
-Here is how the solution is architected, with elements that you will build or deploy highlighted in light blue:
-
-![A data flow diagram showing IoT information originating from an Azure MXChip flowing through IoT Hub and onto an Azure Function.  From the Azure Function, data is bifercated to flow through a client application, as well as to an Event Hub shared by all workshop participants.  The shared Event Hub forwads data to Azure Stream Analytics, where it is forwarded onto another event hub for distribution to the client application.  Additionally, there are data flows from the client application to Cognitive Services and from Stream Analytics to Cosmos DB](Images/architecture.png)
-
-_Solution architecture_
-
-Accelerometer data from the device is transmitted to an Azure IoT Hub. An Azure Function transforms the raw accelerometer data into *flight data* denoting airspeed, heading, altitude, latitude, longitude, pitch, and roll. The destination for that data is a pair of Event Hubs — one that you set up, and one that is shared by every pilot in the room. Events from the "private" Event Hub are consumed by a client app running on your laptop that shows the position and altitude of your aircraft. The events sent to the shared Event Hub go to a Stream Analytics job that analyzes fast-moving data for aircraft that are in danger of colliding and provides that data to the client app and the ATC app. When your aircraft comes too close to another, it turns red on the screen, and a warning appears on the screen of your MXChip. To top it off, Microsoft Cognitive Services translates the warning into the language of your choice.
-
 The goal of this lab is to get the device up and running and sending events to an Azure IoT Hub. Let's get started!
 
 <a name="Prerequisites"></a>
@@ -34,11 +26,9 @@ The goal of this lab is to get the device up and running and sending events to a
 The following are required to complete this lab:
 
 - An [MXChip IoT DevKit](https://microsoft.github.io/azure-iot-developer-kit/)
-- A computer running [Windows 10 Anniversary Edition](https://www.microsoft.com/en-us/software-download/windows10) or higher.
+- A computer
 - An active Microsoft Azure subscription. If you don't have one, [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 - An available WiFi connection or mobile hotspot. Note that the WiFi connection can (and should) be secure, but it must be ungated (i.e. no intermediate login page is required. Gated WiFi is common in public venues and hotels).
-
-Note: For developers work on a Mac, please see [this article](https://docs.microsoft.com/en-us/windows/uwp/porting/setting-up-your-mac-with-windows-10) for installing Windows 10 to enable building and running the UWP portion of this lab.
 
 <a name="Exercises"></a>
 ## Exercises ##
@@ -64,13 +54,13 @@ You have already received a package containing an MXChip IoT DevKit and a USB ca
 
     _Connecting the device to your laptop_
 
-1. Wait for Windows to install the necessary drivers on your laptop. Then open a File Explorer window and confirm that it shows a new drive named "AZ3166." The drive letter that it is assigned to it may be different on your computer.
+1. (If you have a MacBook you can skip this step) Wait for Windows to install the necessary drivers on your laptop. Then open a File Explorer window and confirm that it shows a new drive named "AZ3166." The drive letter that it is assigned to it may be different on your computer.
 
 	![A file explorer window show the MXChip as a drive mounted on the computer.](Images/new-device-my-computer.png)
 
     _The installed device_
 
-1. Now that the device has power and Windows recognizes it as a USB device, the next step is to get it connected to WiFi. That involves putting the device into access-point (AP) mode so that it acts as a WiFi access point, connecting to it with a browser, and configuring it to connect to the access point in the room. Put the device into AP mode by doing the following:
+1. Now that the device has power and your device recognizes it as a USB device, the next step is to get it connected to WiFi. That involves putting the device into access-point (AP) mode so that it acts as a WiFi access point, connecting to it with a browser, and configuring it to connect to the access point in the room. Put the device into AP mode by doing the following:
 
 	- Press and hold the **B button** 
 	- With the B button held down, press and release the **Reset button**
@@ -116,54 +106,42 @@ Now that the device is connected to WiFi, it will automatically connect again if
 <a name="Exercise2"></a>
 ## Exercise 2: Prepare a development environment ##
 
-In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn, the Azure CLI, Visual Studio Code, the Visual Studio Code extension for Arduino, the Arduino IDE, and other tools. Fortunately, this process has been wrapped up in an installation script that will do everything for you. In this exercise, you will install these tools and set up a development environment.
+In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn,  the Arduino IDE, and any text editor of your choice (ex: Notepad). Fortunately, you can find everything you need to download at the following links:
 
-1. Go to https://microsoft.github.io/azure-iot-developer-kit/docs/get-started/ and follow the instructions in **Step 5: prepare the development environment** to download and install the latest version of the developer kit for the MXChip. The download may take a while because the download size is about 300 MB.
+[Windows Download](https://www.dropbox.com/s/mr3ej03h8osum4y/NSBE_download_win.zip?dl=0)
+[Mac Download]()
+
+** Also ask around for USBs with downloads on it
+
+1. After all tools have been downloaded, unplus the USB cable from your device. The start Arduino.
  
-1. After the developer kit is installed, unplug the USB cable from your device. Then start Visual Studio Code.
+1. Select **File** menu > **Preferences**. In the Preferences window, look for the box that says *Additional Boards Manager URLs* copy and paste the following inside:
 
-1. Select **About** from Visual Studio Code's **Help** menu and verify that Visual Studio Code 1.17.0 or higher is installed. If it's not, select **Check for Updates...** from the **Help** menu and update to the latest version, or go to https://code.visualstudio.com/ and download the latest version. Then restart Visual Studio Code.
+`http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,,http://downloads.arduino.cc/packages/package_index.json`
 
 1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
  
-1. Use the **View** > **Command Palette** command (or press **Ctrl+Shift+P**) in Visual Studio Code to display the command palette. Then select **Arduino: Board Manager**.
+1. Next select the **Tools** menu > **Board**, Then select **Board Manager** command (or press **Ctrl+Shift+P**) in Visual Studio Code to display the command palette. .
 
-	![The VSCode quick access menu (F1), shows the Arduino Board Manager option selected](Images/vs-board-manager.png)
-
-    _Launching the Arduino Board Manager_ 
 
 1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. If it is not, click the **Select version** button and select the latest version from the list. Then click the **Install** button to update the developer kit. 
- 
-	![The VSCode Arduino Board Manager tab is open, showing how to verify the developer kit version number.](Images/vs-check-board-installed.png)
 
-    _Verifying the developer kit version number_
+	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/addboard.JPG?raw=true)
+	_Adding the AZ3166 Board_
+ 
 
 1. Open the command palette again and select **Arduino: Library Manager**. Type "ArduinoJson" into the search box. If the version of the package that's installed isn't the latest version shown in the drop-down list, select the latest version from the list and click **Install** to install it.
 
-	![The VSCode Arduino Library Manager tab is open, showing the install button selected for the updating of the ArduinoJson library.](Images/vs-install-json.png)
-
+	![selecting library](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/libraryman.JPG?raw=true)
     _Updating the ArduinoJson library_
 
-1. Open a Command Prompt window and type the following command to determine what version of the Azure CLI is installed:
-
-	```
-	az -v
-	```
-
-	If the azure-cli version number displayed is lower than 2.0.9, go to https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest and install the latest version.
-
-1. Type the following command into the Command Prompt window to discard any credentials cached by the Azure CLI:
-
-	```
-	az logout
-	```
 
 In [Exercise 4](#Exercise4), you will use the development environment you just set up to upload code to the MXChip that transmits data to an Azure IoT Hub. Your next task, however, is to create the IoT Hub.
 
 <a name="Exercise3"></a>
 ## Exercise 3: Provision an Azure IoT Hub ##
 
-[Azure IoT Hubs](https://docs.microsoft.com/azure/iot-hub/iot-hub-what-is-iot-hub) enable IoT devices to connect securely to the cloud and transmit messages (events) that can be ingested by apps and other Azure services. They support bidirectional communication, and they are built to be massively scalable. A single IoT Hub can handle millions of events per second. Messages can be sent over HTTP, or using the [Advanced Message Queuing Protocol](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-what-is-iot-hub) (AMQP) or [Message Queueing Telemetry Transport](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-what-is-iot-hub) (MQTT) protocol. Devices can be authenticated using per-device security keys or X.509 certificates.
+[Azure IoT Hubs](https://docs.microsoft.com/azure/iot-hub/iot-hub-what-is-iot-hub) enable IoT devices to connect securely to the cloud and transmit messages (events) that can be sent to other sources such as mobile apps, websites and etc.
 
 In this exercise, you will provision an Azure IoT Hub for your MXChip to transmit events to.
 
@@ -195,7 +173,25 @@ In this exercise, you will provision an Azure IoT Hub for your MXChip to transmi
 
     _Successful deployment_
 
-Because you selected **S1 - Standard** as the pricing tier in Step 3, you can transmit up to 400,000 messages a day to the IoT Hub for $50 per month. A **Free** tier that accepts up to 8,000 messages per day is also available, but that tier might be too limiting for today's exercise. For more information on the various pricing tiers that are available, see [IoT Hub pricing](https://azure.microsoft.com/pricing/details/iot-hub/).
+Select the iothub you created. Next you want to register your device to the IoTHub you created.
+
+1. In the IoT Hub menu, select the **Devices** option
+
+![selecting devices](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/Hubdev.JPG?raw=true)
+    _Devices Option_
+
+1. You should not have any devices already listed. To register your device, select the **Add** button in the Devices blade.
+
+![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddev.JPG?raw=true)
+    _Add Device_
+ 
+ 1. An Add Device pop up window will show. Create a device named *AZ3166* and press **Save**
+ 
+ ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddevpop.JPG?raw=true)
+ 
+ 1. Once the device is added, select the device and the **Device Detail** blade will pop up. Please store the *Primary Key* and *Connection String - Primary*
+ 
+  ![device detail](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/devicedet.JPG?raw=true)
 
 <a name="Exercise4"></a>
 ## Exercise 4: Send Message to IoT Hub ##
