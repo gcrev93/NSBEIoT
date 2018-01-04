@@ -117,7 +117,7 @@ In order to write code and upload it to the MXChip, you need to set up a develop
  
 1. Select **File** menu > **Preferences**. In the Preferences window, look for the box that says *Additional Boards Manager URLs* copy and paste the following inside:
 
-`http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,,http://downloads.arduino.cc/packages/package_index.json`
+`https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
 
 1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
  
