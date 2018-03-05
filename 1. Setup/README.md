@@ -40,7 +40,7 @@ This lab includes the following exercises:
 - [Exercise 3: Provision an Azure IoT Hub](#Exercise3)
 - [Exercise 4: Send Messages to IoT Hub](#Exercise4)
 - [Exercise 5: Check IoT Hub activity](#Exercise5)
- 
+
 Estimated time to complete this lab: **60** minutes.
 
 <a name="Exercise1"></a>
@@ -62,10 +62,10 @@ You have already received a package containing an MXChip IoT DevKit and a USB ca
 
 1. Now that the device has power and your device recognizes it as a USB device, the next step is to get it connected to WiFi. That involves putting the device into access-point (AP) mode so that it acts as a WiFi access point, connecting to it with a browser, and configuring it to connect to the access point in the room. Put the device into AP mode by doing the following:
 
-	- Press and hold the **B button** 
+	- Press and hold the **B button**
 	- With the B button held down, press and release the **Reset button**
 	- Release the **B button**
- 
+
 	Verify that an SSID and an IP address appear on the device screen. The IP address is the one that you will use to connect to the device from your laptop.
 
 	![The MXChip's display is showing the SSID of its access point along with its IP address.  The 'Reset' and 'B' buttons are highlighted to indicate how to enter the board's AP mode.](Images/view-ssid-and-ip.png)
@@ -114,21 +114,21 @@ In order to write code and upload it to the MXChip, you need to set up a develop
 ** Also ask around for USBs with downloads on it
 
 1. After all tools have been downloaded, unplus the USB cable from your device. The start Arduino.
- 
+
 1. Select **File** menu > **Preferences**. In the Preferences window, look for the box that says *Additional Boards Manager URLs* copy and paste the following inside:
 
 `https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
 
 1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
- 
+
 1. Next select the **Tools** menu > **Board**, Then select **Board Manager** command (or press **Ctrl+Shift+P**) in Visual Studio Code to display the command palette. .
 
 
-1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. If it is not, click the **Select version** button and select the latest version from the list. Then click the **Install** button to update the developer kit. 
+1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. If it is not, click the **Select version** button and select the latest version from the list. Then click the **Install** button to update the developer kit.
 
 	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/addboard.JPG?raw=true)
 	_Adding the AZ3166 Board_
- 
+
 
 1. Open the command palette again and select **Arduino: Library Manager**. Type "ArduinoJson" into the search box. If the version of the package that's installed isn't the latest version shown in the drop-down list, select the latest version from the list and click **Install** to install it.
 
@@ -152,7 +152,7 @@ In this exercise, you will provision an Azure IoT Hub for your MXChip to transmi
 	![The Azure Portal quick start menu shows the selection to add a new IoT Hub to a subscription.](Images/portal-select-new.png)
 
     _Provisioning a new IoT Hub_
- 
+
 1. Enter a unique name for IoT Hub in the **Name** field. IoT Hub names must be unique across Azure, so make sure a green check mark appears next to it. Also make sure **S1 - Standard** is selected as the pricing tier. Select **Create new** under **Resource group** and enter the resource-group name "FlySimResources." Select **East US** as the **Location** (important!). Accept the default values everywhere else, and then click **Create**.
 
 	> You selected East US as the location because in Lab 3, the instructor will create Azure resources in that same region for the IoT Hub to connect to. Azure resources can be connected across regions, but keeping everything within the same data center reduces cost and minimizes latency.
@@ -160,7 +160,7 @@ In this exercise, you will provision an Azure IoT Hub for your MXChip to transmi
 	![The Azure Portal's IoT Hub Configuration pane shows relevant configuration settings.  The pricing tier is set to S1, and a single unit of IoT Hub and 4 Device-to-cloud partitions are entered.](Images/portal-configure-hub.png)
 
     _Configuring an IoT Hub_
- 
+
 1. Click **Resource groups** in the ribbon on the left side of the portal, and then click **FlySimResources** to open the resource group.
 
 	![The Azure Portal's Resource Groups pane displays the newly created IoT Hub.](Images/open-resource-group.png)
@@ -184,13 +184,13 @@ Select the iothub you created. Next you want to register your device to the IoTH
 
 ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddev.JPG?raw=true)
     _Add Device_
- 
+
  1. An Add Device pop up window will show. Create a device named *AZ3166* and press **Save**
- 
+
  ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddevpop.JPG?raw=true)
- 
+
  1. Once the device is added, select the device and the **Device Detail** blade will pop up. Please store the *Primary Key* and *Connection String - Primary*
- 
+
   ![device detail](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/devicedet.JPG?raw=true)
 
 <a name="Exercise4"></a>
