@@ -48,13 +48,13 @@ Estimated time to complete this lab: **60** minutes.
 
 You have already received a package containing an MXChip IoT DevKit and a USB cable. In this exercise, you will connect the device to your laptop, allow Windows to install drivers for it, and connect the device to WiFi so it can transmit events to an Azure IoT Hub.
 
-1. Connect the micro end of the USB cable to the micro-USB port on the device (1). Then connect the other end of the cable to a USB port on your computer (2). Confirm that the green LED next to the micro-USB port on the board lights up (3), and that "No WiFi" appears on the screen of the device.
+1. Connect the micro end of the USB cable to the micro-USB port on the device (1). Then connect the other end of the cable to a USB port on your computer (2). Confirm that the green LED next to the micro-USB port on the board lights up (3), and that "No WiFi Enter AP Mode to config" appears on the screen of the device.
 
 	![The Azure MXChip displaying on it's screen "No Wifi: Enter AP Mode to Configure", is connected via a MicroUSB cable to a computer.](Images/chip-connections.png)
 
     _Connecting the device to your laptop_
 
-1. (If you have a MacBook you can skip this step) Wait for Windows to install the necessary drivers on your laptop. Then open a File Explorer window and confirm that it shows a new drive named "AZ3166." The drive letter that it is assigned to it may be different on your computer.
+1. Wait for Windows to install the necessary drivers on your laptop. Then open a File Explorer window and confirm that it shows a new drive named "AZ3166." The drive letter that it is assigned to it may be different on your computer.
 
 	![A file explorer window show the MXChip as a drive mounted on the computer.](Images/new-device-my-computer.png)
 
@@ -94,7 +94,6 @@ You have already received a package containing an MXChip IoT DevKit and a USB ca
 
 1. Confirm that the screen says "WiFi Connected" and displays the IP address shown in the previous step. If it doesn't — or if the IP address flashes by too quickly for you to read — disconnect the board from your laptop and then plug it back in.
 
-
 	![The MXChip displays a message indicating the WiFi is connected along with the MXChips IP address.](Images/device-final-ip-address.png)
 
     _Connected!_
@@ -106,34 +105,33 @@ Now that the device is connected to WiFi, it will automatically connect again if
 <a name="Exercise2"></a>
 ## Exercise 2: Prepare a development environment ##
 
-In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn,  the Arduino IDE, and any text editor of your choice (ex: Notepad). Fortunately, you can find everything you need to download at the following links:
+In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn, the Arduino IDE, and any text editor of your choice (ex: Notepad). Fortunately, you can find everything you need to download at the following links:
 
-[Windows Download](https://www.dropbox.com/s/mr3ej03h8osum4y/NSBE_download_win.zip?dl=0)
-[Mac Download]()
+[Dropbox Download](https://www.dropbox.com/s/mr3ej03h8osum4y/NSBE_download_win.zip?dl=0)
 
 ** Also ask around for USBs with downloads on it
 
-1. After all tools have been downloaded, unplus the USB cable from your device. The start Arduino.
+1. After all tools have been downloaded, unplug the USB cable from your device. Then install the Arduino app `arduino-1.8.3-windows.exe`. Click Agree to the License Agreement, Click Next for the Installation options, and then Click the Install button. If any Adafruit driver windows open during this process, click the Install buttons on those windows too.
 
-1. Select **File** menu > **Preferences**. In the Preferences window, look for the box that says *Additional Boards Manager URLs* copy and paste the following inside:
+1. Start the Arduino app by clicking on the desktop icon. If you are prompted to allow traffic through the firewall, click **Allow Access**. Select **File** menu > **Preferences**. In the Preferences window, look for the box that says *Additional Boards Manager URLs* copy and paste the following inside then click **OK**:
 
-`https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
+	`https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
 
 1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
 
-1. Next select the **Tools** menu > **Board**, Then select **Board Manager** command (or press **Ctrl+Shift+P**) in Visual Studio Code to display the command palette. .
+1. In the Arduino app select the **Tools** menu > **Board**, Then select **Board Manager**.
 
-
-1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. If it is not, click the **Select version** button and select the latest version from the list. Then click the **Install** button to update the developer kit.
+1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. It should be the same version that's displayed on your MXChip screen. The version number is displayed in a drop down next to the Install button. If it is not, click the drop down button and select the latest version from the list. Then click the **Install** button to update the developer kit. The install should take around 4 minutes.
 
 	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/addboard.JPG?raw=true)
-	_Adding the AZ3166 Board_
 
+	_Adding the AZ3166 Board_
 
 1. Open the command palette again and select **Arduino: Library Manager**. Type "ArduinoJson" into the search box. If the version of the package that's installed isn't the latest version shown in the drop-down list, select the latest version from the list and click **Install** to install it.
 
 	![selecting library](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/libraryman.JPG?raw=true)
-    _Updating the ArduinoJson library_
+
+  _Updating the ArduinoJson library_
 
 
 In [Exercise 4](#Exercise4), you will use the development environment you just set up to upload code to the MXChip that transmits data to an Azure IoT Hub. Your next task, however, is to create the IoT Hub.
