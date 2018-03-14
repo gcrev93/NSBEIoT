@@ -117,22 +117,25 @@ In order to write code and upload it to the MXChip, you need to set up a develop
 
 	`https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
 
-1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
-
-1. In the Arduino app select the **Tools** menu > **Board**, Then select **Board Manager**.
-
-1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. It should be the same version that's displayed on your MXChip screen. The version number is displayed in a drop down next to the Install button. If it is not, click the drop down button and select the latest version from the list. Then click the **Install** button to update the developer kit. The install should take around 4 minutes.
-
 	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/addboard.JPG?raw=true)
 
 	_Adding the AZ3166 Board_
 
-1. Open the command palette again and select **Arduino: Library Manager**. Type "ArduinoJson" into the search box. If the version of the package that's installed isn't the latest version shown in the drop-down list, select the latest version from the list and click **Install** to install it.
+1. Plug the USB cable back into the device. If you are prompted to allow Java traffic through the firewall, click **Allow Access**.
+
+1. In the Arduino app select the **Tools** menu > **Board**, Then select **Board Manager**.
+
+1. Type "AZ3166" into the search box and verify that the latest version of the IoT Developer Kit is installed. It should be the same version that's displayed on your MXChip screen. The version number is displayed in a drop down next to the Install button. If it is not, click the drop down button and select the latest version from the list. Then click the **Install** button to update the developer kit. The install should only take a few seconds.
+
+	![installing sdk](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/azure-iot-developer-kit.JPG?raw=true)
+
+	_Adding the AZ3166 Board_
+
+1. In the Arduino app select the **Sketch** menu > **Include Library** and select **Manage Libraries**. Type "ArduinoJson" into the search box. If the version of the package that's installed isn't the latest version shown in the drop-down list, select the latest version from the list and click **Install** to install it.
 
 	![selecting library](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/libraryman.JPG?raw=true)
 
   _Updating the ArduinoJson library_
-
 
 In [Exercise 4](#Exercise4), you will use the development environment you just set up to upload code to the MXChip that transmits data to an Azure IoT Hub. Your next task, however, is to create the IoT Hub.
 
@@ -173,15 +176,17 @@ In this exercise, you will provision an Azure IoT Hub for your MXChip to transmi
 
 Select the iothub you created. Next you want to register your device to the IoTHub you created.
 
-1. In the IoT Hub menu, select the **Devices** option
+1. In the IoT Hub menu, select the **IoT Devices** option
 
 ![selecting devices](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/Hubdev.JPG?raw=true)
-    _Devices Option_
+
+_Devices Option_
 
 1. You should not have any devices already listed. To register your device, select the **Add** button in the Devices blade.
 
 ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddev.JPG?raw=true)
-    _Add Device_
+
+_Add Device_
 
  1. An Add Device pop up window will show. Create a device named *AZ3166* and press **Save**
 
