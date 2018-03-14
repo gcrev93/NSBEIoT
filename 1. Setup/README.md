@@ -105,9 +105,13 @@ Now that the device is connected to WiFi, it will automatically connect again if
 <a name="Exercise2"></a>
 ## Exercise 2: Prepare a development environment ##
 
-In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn, the Arduino IDE, and any text editor of your choice (ex: Notepad). Fortunately, you can find everything you need to download at the following links:
+In order to write code and upload it to the MXChip, you need to set up a development environment that includes Node.js, Yarn, the Arduino IDE, and any text editor of your choice (ex: Notepad). Fortunately, you can find everything you need to download at the following link. No need to sign in either, just click **No thanks, continue to view**:
 
 [Dropbox Download](https://www.dropbox.com/s/mr3ej03h8osum4y/NSBE_download_win.zip?dl=0)
+
+![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/dropbox-download.png?raw=true)
+
+_Dropbox_
 
 ** Also ask around for USBs with downloads on it
 
@@ -117,7 +121,7 @@ In order to write code and upload it to the MXChip, you need to set up a develop
 
 	`https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json,http://downloads.arduino.cc/packages/package_index.json`
 
-	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/addboard.JPG?raw=true)
+	![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/az-iot-devkit.png?raw=true)
 
 	_Adding the AZ3166 Board_
 
