@@ -174,25 +174,23 @@ In this exercise, you will provision an Azure IoT Hub for your MXChip to transmi
 
     _Successful deployment_
 
-Select the iothub you created. Next you want to register your device to the IoTHub you created.
+1. Select the iothub you created. Next you want to register your device to the IoTHub you created. In the IoT Hub menu, select the **IoT Devices** option.
 
-1. In the IoT Hub menu, select the **IoT Devices** option
+	![selecting devices](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/Hubdev.JPG?raw=true)
 
-![selecting devices](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/Hubdev.JPG?raw=true)
-
-_Devices Option_
+	_Devices Option_
 
 1. You should not have any devices already listed. To register your device, select the **Add** button in the Devices blade.
 
-![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddev.JPG?raw=true)
+	![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddev.JPG?raw=true)
 
-_Add Device_
+	_Add Device_
 
- 1. An Add Device pop up window will show. Create a device named *AZ3166* and press **Save**
+1. An Add Device pop up window will show. Create a device named *AZ3166* and press **Save**
 
- ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddevpop.JPG?raw=true)
+	 ![Add device](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/adddevpop.JPG?raw=true)
 
- 1. Once the device is added, select the device and the **Device Detail** blade will pop up. Please store the *Primary Key* and *Connection String - Primary*
+1. Once the device is added, select the device and the **Device Detail** blade will pop up. Please store the *Primary Key* and *Connection String - Primary Key* in Notepad.
 
   ![device detail](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/devicedet.JPG?raw=true)
 
