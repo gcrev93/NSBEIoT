@@ -109,7 +109,7 @@ In order to write code and upload it to the MXChip, you need to set up a develop
 
 [Dropbox Download](https://www.dropbox.com/s/mr3ej03h8osum4y/NSBE_download_win.zip?dl=0)
 
-![selecting board](https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/dropbox-download.png?raw=true)
+<p align="center"><img src="https://github.com/gcrev93/NSBEIoT/blob/master/1.%20Setup/Images/dropbox-download.png?raw=true" width="520"></p>
 
 _Dropbox_
 
